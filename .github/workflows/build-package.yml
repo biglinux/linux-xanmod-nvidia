@@ -23,7 +23,9 @@ jobs:
         shell: bash
         run: |
           sudo pacman -Sy --noconfirm --needed \
-          git 
+          git \
+          openssh \
+          xz
 
       # Tmate ##
       - name: Setup tmate session
