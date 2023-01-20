@@ -9,7 +9,7 @@ on:
     
   repository_dispatch:
     types:
-      - */*
+      - '**'
 
 jobs:
   build:
