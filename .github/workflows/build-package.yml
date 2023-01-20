@@ -68,6 +68,12 @@ jobs:
           echo "mkdepends: ${{ github.event.client_payload.mkdepends }}"
           echo "xanmod: ${{ github.event.client_payload.xanmod }}"
           
+      # Tmate ##
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          install-dependencies: false
+          
       - name: Remake PKGBUILD
         id: remakepkg
         uses: BigLinux-Package-Build/xanmod-extra-module@main
@@ -123,11 +129,6 @@ jobs:
 #           #.install
 #           sed -i 's/EXTRAMODULES=.*/EXTRAMODULES=$('"$find"')/;s/depmod.*/depmod $('"$find"')/' *.install
 
-      # Tmate ##
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          install-dependencies: false
 
       - name: Update github
         run: |
