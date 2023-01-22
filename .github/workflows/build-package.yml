@@ -132,7 +132,7 @@ jobs:
           git add --all
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          if [ -n "$(git commit -m "new translate" -a | grep "nothing to commit")" ];then exit 0; fi
+          if [ -n "$(git commit -m "new version" -a | grep "nothing to commit")" ];then exit 0; fi
 
       - name: Push changes
         uses: ad-m/github-push-action@master
