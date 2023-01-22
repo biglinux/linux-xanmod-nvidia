@@ -14,8 +14,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: manjarolinux/base
+    container: archlinux:latest
+      # image: manjarolinux/base
     steps:
       - uses: actions/checkout@v3
 
