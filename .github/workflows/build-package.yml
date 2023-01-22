@@ -14,52 +14,49 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: manjarolinux/base
+    # container:
+      # image: manjarolinux/base
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        shell: bash
-        run: |
-          sudo pacman -Sy --noconfirm --needed \
-          git \
-          openssh \
-          xz \
-          tmate
+      # - name: Install Dependencies
+      #   shell: bash
+      #   run: |
+      #     sudo pacman -Sy --noconfirm --needed \
+      #     git \
+      #     openssh \
+      #     xz \
+      #     tmate
           
-      - name: Add BigLinux Repo
-        shell: bash
-        run: |
-          #add biglinux repository
-          sudo sed -i '/\[core\]/{h;s/.*/\[biglinux-update-stable\]/;p;x;}' /etc/pacman.conf
-          sudo sed -i '/\[core\]/{h;s/.*/SigLevel = PackageRequired/;p;x;}' /etc/pacman.conf
-          sudo sed -i '/\[core\]/{h;s/.*/Server = https:\/\/repo.biglinux.com.br\/update-stable\/$arch/;p;x;}' /etc/pacman.conf
-          sudo sed -i '/\[core\]/{h;s/.*//;p;x;}' /etc/pacman.conf
-          echo '
-          [biglinux-testing]
-          SigLevel = PackageRequired
-          Server = https://repo.biglinux.com.br/testing/$arch' | sudo tee -a /etc/pacman.conf
-          echo '
-          [biglinux-stable]
-          SigLevel = PackageRequired
-          Server = https://repo.biglinux.com.br/stable/$arch' | sudo tee -a /etc/pacman.conf
-          
-          #add biglinux keyring
-          sudo git clone --depth 1 https://github.com/biglinux/biglinux-keyring.git
-          pushd biglinux-keyring
-            sudo install -m0644 biglinux.gpg /usr/share/pacman/keyrings/
-            sudo install -m0644 biglinux-trusted /usr/share/pacman/keyrings/
-            sudo install -m0644 biglinux-trusted /usr/share/pacman/keyrings/
-          popd
-          sudo rm -rf biglinux-keyring
-          sudo git clone https://github.com/biglinux/biglinux-key.git
-          sudo mkdir -p /etc/pacman.d/gnupg/
-          sudo cp -r biglinux-key/usr/share/pacman/keyrings/* /etc/pacman.d/gnupg/
-          sudo rm -r biglinux-key
-          
-          sudo pacman -Sy
-
+      # - name: Add BigLinux Repo
+      #   shell: bash
+      #   run: |
+      #     #add biglinux repository
+      #     sudo sed -i '/\[core\]/{h;s/.*/\[biglinux-update-stable\]/;p;x;}' /etc/pacman.conf
+      #     sudo sed -i '/\[core\]/{h;s/.*/SigLevel = PackageRequired/;p;x;}' /etc/pacman.conf
+      #     sudo sed -i '/\[core\]/{h;s/.*/Server = https:\/\/repo.biglinux.com.br\/update-stable\/$arch/;p;x;}' /etc/pacman.conf
+      #     sudo sed -i '/\[core\]/{h;s/.*//;p;x;}' /etc/pacman.conf
+      #     echo '
+      #     [biglinux-testing]
+      #     SigLevel = PackageRequired
+      #     Server = https://repo.biglinux.com.br/testing/$arch' | sudo tee -a /etc/pacman.conf
+      #     echo '
+      #     [biglinux-stable]
+      #     SigLevel = PackageRequired
+      #     Server = https://repo.biglinux.com.br/stable/$arch' | sudo tee -a /etc/pacman.conf
+      #     #add biglinux keyring
+      #     sudo git clone --depth 1 https://github.com/biglinux/biglinux-keyring.git
+      #     pushd biglinux-keyring
+      #       sudo install -m0644 biglinux.gpg /usr/share/pacman/keyrings/
+      #       sudo install -m0644 biglinux-trusted /usr/share/pacman/keyrings/
+      #       sudo install -m0644 biglinux-trusted /usr/share/pacman/keyrings/
+      #     popd
+      #     sudo rm -rf biglinux-keyring
+      #     sudo git clone https://github.com/biglinux/biglinux-key.git
+      #     sudo mkdir -p /etc/pacman.d/gnupg/
+      #     sudo cp -r biglinux-key/usr/share/pacman/keyrings/* /etc/pacman.d/gnupg/
+      #     sudo rm -r biglinux-key
+      #     sudo pacman -Sy
           
       - name: echo PayLoads
         run: |
@@ -68,11 +65,11 @@ jobs:
           echo "mkdepends: ${{ github.event.client_payload.mkdepends }}"
           echo "xanmod: ${{ github.event.client_payload.xanmod }}"
           
-      # Tmate ##
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          install-dependencies: false
+      # # Tmate ##
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
+      #   # with:
+      #     # install-dependencies: false
           
       - name: Remake PKGBUILD
         id: remakepkg
