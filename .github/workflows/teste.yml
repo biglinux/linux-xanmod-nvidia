@@ -22,10 +22,11 @@ jobs:
       - name: Install Dependencies
         shell: bash
         run: |
-          sudo pacman -Sy --noconfirm --needed \
+          pacman -Sy --noconfirm --needed \
           git \
           openssh \
           xz \
+          sudo \
           tmate
 #           
 #       - name: Add BigLinux Repo
