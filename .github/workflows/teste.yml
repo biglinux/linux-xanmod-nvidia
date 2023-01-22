@@ -1,0 +1,149 @@
+name: Remake PKGBUILD TESTE
+
+on:
+  workflow_dispatch:
+
+  # push:
+    #branches: [ "master", "main", "*" ]
+    # branches: [ "*" ]
+    
+  repository_dispatch:
+    types:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # container:
+    #   image: manjarolinux/base
+    steps:
+      - uses: actions/checkout@v3
+
+#       - name: Install Dependencies
+#         shell: bash
+#         run: |
+#           sudo pacman -Sy --noconfirm --needed \
+#           git \
+#           openssh \
+#           xz \
+#           tmate
+#           
+#       - name: Add BigLinux Repo
+#         shell: bash
+#         run: |
+#           #add biglinux repository
+#           sudo sed -i '/\[core\]/{h;s/.*/\[biglinux-update-stable\]/;p;x;}' /etc/pacman.conf
+#           sudo sed -i '/\[core\]/{h;s/.*/SigLevel = PackageRequired/;p;x;}' /etc/pacman.conf
+#           sudo sed -i '/\[core\]/{h;s/.*/Server = https:\/\/repo.biglinux.com.br\/update-stable\/$arch/;p;x;}' /etc/pacman.conf
+#           sudo sed -i '/\[core\]/{h;s/.*//;p;x;}' /etc/pacman.conf
+#           echo '
+#           [biglinux-testing]
+#           SigLevel = PackageRequired
+#           Server = https://repo.biglinux.com.br/testing/$arch' | sudo tee -a /etc/pacman.conf
+#           echo '
+#           [biglinux-stable]
+#           SigLevel = PackageRequired
+#           Server = https://repo.biglinux.com.br/stable/$arch' | sudo tee -a /etc/pacman.conf
+#           
+#           #add biglinux keyring
+#           sudo git clone --depth 1 https://github.com/biglinux/biglinux-keyring.git
+#           pushd biglinux-keyring
+#             sudo install -m0644 biglinux.gpg /usr/share/pacman/keyrings/
+#             sudo install -m0644 biglinux-trusted /usr/share/pacman/keyrings/
+#             sudo install -m0644 biglinux-trusted /usr/share/pacman/keyrings/
+#           popd
+#           sudo rm -rf biglinux-keyring
+#           sudo git clone https://github.com/biglinux/biglinux-key.git
+#           sudo mkdir -p /etc/pacman.d/gnupg/
+#           sudo cp -r biglinux-key/usr/share/pacman/keyrings/* /etc/pacman.d/gnupg/
+#           sudo rm -r biglinux-key
+#           
+#           sudo pacman -Sy
+# 
+#           
+#       - name: echo PayLoads
+#         run: |
+#           echo "repo: ${{ github.event.client_payload.repo }}"
+#           echo "mod: ${{ github.event.client_payload.mod }}"
+#           echo "mkdepends: ${{ github.event.client_payload.mkdepends }}"
+#           echo "xanmod: ${{ github.event.client_payload.xanmod }}"
+          
+      # Tmate ##
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          install-dependencies: false
+          
+      # - name: Remake PKGBUILD
+      #   id: remakepkg
+      #   uses: BigLinux-Package-Build/xanmod-extra-module@main
+      #   with:
+      #     repo: ${{ github.event.client_payload.repo }}
+      #     mod: ${{ github.event.client_payload.mod }}
+      #     mkdepends: ${{ github.event.client_payload.mkdepends }}
+      #     xanmod: ${{ github.event.client_payload.xanmod }}
+          
+#       - name: remake PKGBUILD
+#         shell: bash
+#         run: |
+#           #variables
+#           repo=stable
+#           mod=nvidia
+#           mkdepends=nvidia-utils
+#           xanmod=linux-xanmod
+# 
+#           #clean workdir
+#           rm -r *
+# 
+#           xanmajor=$(curl -s https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=$xanmod | sed 's/<[^>]*>//g' | grep _major= | cut -d "=" -f2 | sed 's/\.//')
+# 
+#           #clone extra module
+#           git clone https://gitlab.manjaro.org/packages/extra/linux${xanmajor}-extramodules/${mod}.git
+# 
+#           dir=$(ls)
+#           mv ${dir}/* .
+#           rm -r $dir
+# 
+#           #_linuxprefix=
+#           sed -i "s/_linuxprefix=.*/_linuxprefix=$xanmod/" PKGBUILD
+# 
+#           #_extramodules=
+#           xanverponto=$(pacman -Ss $xanmod | grep biglinux-${repo} | grep -v headers | grep -v "$xanmod-" | cut -d " " -f2 | cut -d "-" -f1)
+#           find="find \/usr\/lib\/modules -type d -iname "${xanverponto}*xanmod*" | rev | cut -d "'"\/"'" -f1 | rev"
+#           sed -i 's/_extramodules=.*/_extramodules=$('"$find"')/' PKGBUILD
+# 
+#           #pkgrel=
+#           xanversemponto=$(pacman -Ss $xanmod | grep biglinux-${repo} | grep -v headers | grep -v "$xanmod-" | cut -d " " -f2 | sed 's/\.//g' | sed 's/\-//g')
+#           sed -i 's/pkgrel=.*/pkgrel='"${xanversemponto}"'/' PKGBUILD
+# 
+#           #_kernver=
+#           sed -i 's/_kernver=.*/_kernver=$('"$find"')/' PKGBUILD
+# 
+#           #pkgver
+#           pkgver=$(pacman -Ss $mkdepends| grep $mkdepends | grep -v "\-${mkdepends}" | cut -d " " -f2 | sed "s|-.*||")
+#           sed -i "s/pkgver=.*/pkgver=${pkgver}/" PKGBUILD
+# 
+#           #sha256sums=
+#           sed -i 's/sha256sums=.*/sha256sums=(SKIP)/' PKGBUILD
+#           
+#           #.install
+#           sed -i 's/EXTRAMODULES=.*/EXTRAMODULES=$('"$find"')/;s/depmod.*/depmod $('"$find"')/' *.install
+
+
+      # - name: Update github
+      #   run: |
+      #     git add --all
+      #     git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      #     git config --local user.name "github-actions[bot]"
+      #     if [ -n "$(git commit -m "new translate" -a | grep "nothing to commit")" ];then exit 0; fi
+      # 
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
+      # 
+      # - name: Send Hooks BigLinux Build Package
+      #   shell: bash
+      #   run: |
+      #     curl -X POST -H "Accept: application/json" -H "Authorization: token ${{ secrets.WEBHOOK_TOKEN }}" --data '{"event_type": "${{ github.repository }}", "client_payload": { "branch": "${{ github.ref_name }}", "url": "https://github.com/${{ github.repository }}", "version": "1.2.3"}}' https://api.github.com/repos/BigLinux-Package-Build/build-package/dispatches
