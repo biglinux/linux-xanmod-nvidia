@@ -1,22 +1,13 @@
-# Maintainer: Bernhard Landauer <bernhard[at]manjaro[dot]org>
+# Maintainer: Bernhard Landauer <bernhard@manjaro.org>
 # Maintainer: Philip Müller <philm[at]manjaro[dot]org>
-# Contributor: Gerd Röthig (DAC24)
-
-# Archlinux credits:
-# Maintainer : Thomas Baechler <thomas@archlinux.org>
-# Contributor: Alonso Rodriguez <alonsorodi20 (at) gmail (dot) com>
-# Contributor: Sven-Hendrik Haase <sh@lutzhaase.com>
-# Contributor: Felix Yan <felixonmars@archlinux.org>
-# Contributor: loqs
-# Contributor: Dede Dindin Qudsy <xtrymind+gmail+com>
-# Contributor: Ike Devolder <ike.devolder+gmail+com>
+# Archlinux maintainer : Thomas Baechler <thomas@archlinux.org>
 
 _linuxprefix=linux-xanmod
 _extramodules=$(find /usr/lib/modules -type d -iname 6.1.7*xanmod* | rev | cut -d "/" -f1 | rev)
 
-pkgname=$_linuxprefix-nvidia-390xx
+pkgname=$_linuxprefix-nvidia
 pkgdesc="NVIDIA drivers for linux"
-pkgver=390.157
+pkgver=525.60.11
 pkgrel=6171
 arch=('x86_64')
 url="http://www.nvidia.com/"

@@ -1,0 +1,11 @@
+--- a/kernel/nvidia-drm/nvidia-drm-helper.c	2022-08-26 11:42:33.152047728 +0200
++++ b/kernel/nvidia-drm/nvidia-drm-helper.c	2022-08-26 11:42:51.741615701 +0200
+@@ -28,7 +28,7 @@
+  */
+
+ #include "nvidia-drm-helper.h"
+-
++#include <drm/drm_framebuffer.h>
+ #include "nvmisc.h"
+
+ #if defined(NV_DRM_ATOMIC_MODESET_AVAILABLE)
