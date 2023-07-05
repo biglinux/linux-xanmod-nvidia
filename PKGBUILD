@@ -7,7 +7,7 @@ _extramodules=$(find /usr/lib/modules -type d -iname 6.4.1*xanmod* | rev | cut -
 
 pkgname=$_linuxprefix-nvidia
 pkgdesc="NVIDIA drivers for linux"
-pkgver=535.54.03
+pkgver=530.41.03
 pkgrel=64110
 arch=('x86_64')
 url="http://www.nvidia.com/"
