@@ -3,12 +3,12 @@
 # Archlinux maintainer : Thomas Baechler <thomas@archlinux.org>
 
 _linuxprefix=linux-xanmod
-_extramodules=$(find /usr/lib/modules -type d -iname 6.4.2*xanmod* | rev | cut -d "/" -f1 | rev)
+_extramodules=$(find /usr/lib/modules -type d -iname 6.4.3*xanmod* | rev | cut -d "/" -f1 | rev)
 
 pkgname=$_linuxprefix-nvidia
 pkgdesc="NVIDIA drivers for linux"
 pkgver=535.54.03
-pkgrel=64230
+pkgrel=64320
 arch=('x86_64')
 url="http://www.nvidia.com/"
 license=('custom')
@@ -32,7 +32,7 @@ prepare() {
 }
 
 build() {
-    _kernver=$(find /usr/lib/modules -type d -iname 6.4.2*xanmod* | rev | cut -d "/" -f1 | rev)
+    _kernver=$(find /usr/lib/modules -type d -iname 6.4.3*xanmod* | rev | cut -d "/" -f1 | rev)
 
     cd "${_pkg}"
     make -C kernel SYSSRC=/usr/lib/modules/"${_kernver}/build" module
