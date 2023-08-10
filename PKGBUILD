@@ -7,7 +7,7 @@ _extramodules=$(find /usr/lib/modules -type d -iname 6.4.8*xanmod* | rev | cut -
 
 pkgname=$_linuxprefix-nvidia
 pkgdesc="NVIDIA drivers for linux"
-pkgver=535.86.05
+pkgver=535.98
 pkgrel=64810
 arch=('x86_64')
 url="http://www.nvidia.com/"
@@ -20,7 +20,7 @@ options=(!strip)
 install=nvidia.install
 _durl="https://us.download.nvidia.com/XFree86/Linux-x86"
 source=("${_durl}_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run")
-sha256sums=('aabb2514d7951049615e313e8489f903cef6afe66cc56850297ef83a28611081')
+sha256sums=('890b28bf1cee974b32e68dd4bb1138bfadd37cbc6fdf2c18a41f211852ad4ee8')
 
 _pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
 
