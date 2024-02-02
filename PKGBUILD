@@ -32,6 +32,7 @@ prepare() {
 }
 
 build() {
+  _kernver="$(cat /usr/src/${_linuxprefix}/version)"
 
     cd "${_pkg}"
     make -C kernel SYSSRC=/usr/lib/modules/"${_kernver}/build" module
