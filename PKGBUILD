@@ -7,7 +7,7 @@ _linuxprefix=linux-xanmod
 pkgname="${_linuxprefix}-nvidia"
 pkgdesc="NVIDIA drivers for linux"
 pkgver=550.90.07
-pkgrel=69710
+pkgrel=69810
 arch=('x86_64')
 url="http://www.nvidia.com/"
 license=('custom')
@@ -18,7 +18,7 @@ provides=("nvidia=${pkgver}" 'NVIDIA-MODULE')
 options=(!strip)
 _durl="https://us.download.nvidia.com/XFree86/Linux-x86"
 source=("${_durl}_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run")
-sha256sums=('5a92545013649d6435d46fc8b5af617f4e3fdea78ee435e034c14bc47557c117')
+sha256sums=(SKIP)
 
 _pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
 
