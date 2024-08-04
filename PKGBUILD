@@ -1,13 +1,13 @@
 # Maintainer: Bernhard Landauer <bernhard@manjaro.org>
 # Maintainer: Philip Müller <philm[at]manjaro[dot]org>
-# Contributor: Thomas Baechler <thomas@archlinux.org>
+# Archlinux maintainer : Thomas Baechler <thomas@archlinux.org>
 
 _linuxprefix=linux-xanmod
 
 pkgname="${_linuxprefix}-nvidia"
 pkgdesc="NVIDIA drivers for linux"
 pkgver=550.100
-pkgrel=69121
+pkgrel=61031
 arch=('x86_64')
 url="http://www.nvidia.com/"
 license=('custom')
