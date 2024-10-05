@@ -19,7 +19,7 @@ options=(!strip)
 _durl="https://us.download.nvidia.com/XFree86/Linux-x86"
 source=("${_durl}_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run"
         'make-modeset-fbdev-default.patch')
-sha256sums=(SKIP)
+sha256sums=('SKIP'
             '03e9c10852312cff661380611b201d7bd45d3869b28d57c3614f7a4bb033c59f')
 
 _pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
