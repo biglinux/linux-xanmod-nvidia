@@ -20,7 +20,7 @@ _durl="https://us.download.nvidia.com/XFree86/Linux-x86"
 source=("${_durl}_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run"
         'make-modeset-fbdev-default.patch')
 sha256sums=(SKIP)
-            '03e9c10852312cff661380611b201d7bd45d3869b28d57c3614f7a4bb033c59f')
+            '1850b14877a87083d1800d0e75714347fc8049a0f4ff1e354769f3058e372e1a')
 
 _pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
 
@@ -33,7 +33,7 @@ prepare() {
     # This avoids various issue, when Simplefb is used
     # https://gitlab.archlinux.org/archlinux/packaging/packages/nvidia-utils/-/issues/14
     # https://github.com/rpmfusion/nvidia-kmod/blob/master/make_modeset_default.patch
-    patch -Np1 < "$srcdir"/make-modeset-fbdev-default.patch
+    patch -Np1 < "$srcdir"/make-modeset-fbdev-default.patch -d "${srcdir}/${_pkg}/kernel"
 }
 
 build() {
